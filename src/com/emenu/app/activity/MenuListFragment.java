@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuListFragment extends Fragment {
 
@@ -55,6 +56,7 @@ public class MenuListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		Toast.makeText(getActivity(), "createView", Toast.LENGTH_SHORT).show();
 		itemList = new ArrayList<MenuItemEntity>();		
 		for(int i = 0;i<10;i++)
 		{
@@ -80,6 +82,7 @@ public class MenuListFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
+		Toast.makeText(getActivity(), "save state", Toast.LENGTH_SHORT).show();
 		//outState.putString(KEY_CONTENT, mContent);
 	}
 //	@Override

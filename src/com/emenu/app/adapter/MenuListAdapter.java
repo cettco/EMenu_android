@@ -33,7 +33,7 @@ public class MenuListAdapter extends FragmentPagerAdapter{
 	@Override
     public CharSequence getPageTitle(int position) {
         //return CONTENT[position % CONTENT.length].toUpperCase();
-		return titleList.get(position);
+		return titleList.get(position % titleList.size());
     }
 
 }

@@ -25,9 +25,13 @@ public class MenuListActivity extends FragmentActivity {
 		pagerArrayList = new ArrayList<MenuListFragment>();
 		pagerArrayList.add(MenuListFragment.newInstance(0));
 		pagerArrayList.add(MenuListFragment.newInstance(1));
+		pagerArrayList.add(MenuListFragment.newInstance(2));
+		pagerArrayList.add(MenuListFragment.newInstance(3));
 		titleList = new ArrayList<String>();
-		titleList.add("first");
-		titleList.add("second");
+		titleList.add("特价");
+		titleList.add("推荐");
+		titleList.add("第三");
+		titleList.add("第四");
 		FragmentPagerAdapter adapter = new MenuListAdapter(getSupportFragmentManager(), pagerArrayList, titleList);
 		ViewPager pager = (ViewPager)findViewById(R.id.menuListPager);
         pager.setAdapter(adapter);

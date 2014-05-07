@@ -1,14 +1,22 @@
 package com.emenu.app;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
+
 import com.emenu.app.R;
 import com.emenu.app.activity.MenuListActivity;
 import com.emenu.app.activity.MipcaActivityCapture;
+import com.emenu.app.adapter.ImagePagerAdapter;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,42 +25,100 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	private final static int SCANNIN_GREQUEST_CODE = 1;
-	/**
-	 * 显示扫描结果
-	 */
-	private TextView mTextView ;
-	/**
-	 * 显示扫描拍的图片
-	 */
-	private ImageView mImageView;
-	
-
+	private AutoScrollViewPager viewPager = null;
+	private CirclePageIndicator indicator = null;
+	private int pos = 0;
+	private Button preOrderBtn;
+	private Button scanBtn;
+	private Button resListBtn;
+	private TextView scanResultText;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mTextView = (TextView) findViewById(R.id.result); 
-		mImageView = (ImageView) findViewById(R.id.qrcode_bitmap);
+		viewPager = (AutoScrollViewPager) findViewById(R.id.scrollViewPager);
+		indicator = (CirclePageIndicator) findViewById(R.id.circlePage);
+
+		List<Integer> imageIdList = new ArrayList<Integer>();
+		imageIdList.add(R.drawable.pic1);
+		imageIdList.add(R.drawable.pic2);
+		imageIdList.add(R.drawable.pic3);
+		imageIdList.add(R.drawable.pic4);
+		imageIdList.add(R.drawable.pic5);
 		
-		//点击按钮跳转到二维码扫描界面，这里用的是startActivityForResult跳转
-		//扫描完了之后调到该界面
-		Button mButton = (Button) findViewById(R.id.button1);
-		mButton.setOnClickListener(new OnClickListener() {
-			
+		viewPager.setAdapter(new ImagePagerAdapter(getApplicationContext(),
+				imageIdList));
+		indicator.setViewPager(viewPager);
+		viewPager.setInterval(2000);
+		viewPager.startAutoScroll();
+
+		indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
 			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent();
-//				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
-				intent.setClass(MainActivity.this, MenuListActivity.class);
-				startActivity(intent);
+			public void onPageSelected(int position) {
+				// TODO Auto-generated method stub
+				pos = position;
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+
 			}
 		});
+		
+		scanBtn = (Button)findViewById(R.id.scanCode);
+		preOrderBtn = (Button)findViewById(R.id.preOrder);
+		resListBtn = (Button) findViewById(R.id.restaurantList);
+		scanBtn.setOnClickListener(scanBtnClickListener);
+		preOrderBtn.setOnClickListener(preOrderBtncClickListener);
+		resListBtn.setOnClickListener(resListBtnClickListener);
+		
+		
+		//测试代码
+		scanResultText = (TextView)findViewById(R.id.scanResultText);
+		
 	}
+	private OnClickListener scanBtnClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, MipcaActivityCapture.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+			
+		}
+	};
+	private OnClickListener preOrderBtncClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	private OnClickListener resListBtnClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, MenuListActivity.class);
+			startActivity(intent);
+			
+		}
+	};
 	
-	
+	//Testing code
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -61,12 +127,13 @@ public class MainActivity extends Activity {
 			if(resultCode == RESULT_OK){
 				Bundle bundle = data.getExtras();
 				//显示扫描到的内容
-				mTextView.setText(bundle.getString("result"));
+				scanResultText.setText(bundle.getString("result"));
 				//显示
-				mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+				//mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
 			}
 			break;
 		}
-    }	
+    }
+	
 
 }
