@@ -14,6 +14,7 @@ import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -69,6 +71,18 @@ public class MenuListFragment extends Fragment {
 		View fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
 		mListView = (ListView)fragmentView.findViewById(R.id.restList);
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), RestaurantDetailActivity.class);
+				startActivity(intent);
+			}
+			
+		});
 		final MenuListItemAdapter adapter = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
 		mListView.setAdapter(adapter);
 		return fragmentView;

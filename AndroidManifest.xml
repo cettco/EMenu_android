@@ -39,6 +39,9 @@
             android:name="com.emenu.app.activity.MenuListActivity"
             android:theme="@style/StyledIndicators" >
         </activity>
+        <activity
+            android:name="com.emenu.app.activity.RestaurantDetailActivity" >
+        </activity>
     </application>
 
 </manifest>
