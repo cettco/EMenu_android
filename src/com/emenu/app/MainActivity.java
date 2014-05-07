@@ -2,6 +2,7 @@ package com.emenu.app;
 
 
 import com.emenu.app.R;
+import com.emenu.app.activity.MenuListActivity;
 import com.emenu.app.activity.MipcaActivityCapture;
 
 import android.app.Activity;
@@ -42,9 +43,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+//				intent.setClass(MainActivity.this, MipcaActivityCapture.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+				intent.setClass(MainActivity.this, MenuListActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
