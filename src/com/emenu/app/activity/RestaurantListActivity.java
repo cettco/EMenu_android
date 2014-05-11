@@ -2,6 +2,8 @@ package com.emenu.app.activity;
 
 import java.util.ArrayList;
 
+import cn.trinea.android.common.view.DropDownListView;
+
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.adapter.RestaurantListAdapter;
@@ -21,7 +23,7 @@ import android.widget.Toast;
 public class RestaurantListActivity extends Activity {
 
 	private Button locationButton;
-	private ListView resListView;
+	private DropDownListView resListView;
 	private RestaurantListAdapter restaurantListAdapter;
 	private ArrayList<RestaurantItemEntity> restaurantItemList;
 	@Override
@@ -34,7 +36,7 @@ public class RestaurantListActivity extends Activity {
 	}
 	private void initListView()
 	{
-		resListView = (ListView)findViewById(R.id.resListView);
+		resListView = (DropDownListView)findViewById(R.id.resListView);
 		restaurantItemList = new ArrayList<RestaurantItemEntity>();
 		for(int i=0;i<10;i++)
 		{

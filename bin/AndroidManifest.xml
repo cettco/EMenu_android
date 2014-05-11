@@ -47,6 +47,8 @@
         
         <activity android:name="com.emenu.app.activity.RestaurantListActivity" >
         </activity>
+        <activity android:name="com.emenu.app.activity.CartActivity" >
+        </activity>
     </application>
 
 </manifest>

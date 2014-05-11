@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:listViewAttr="http://schemas.android.com/apk/res/com.emenu.app"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -31,16 +32,22 @@
             android:text="默认排序" />
     </LinearLayout>
 
-    <LinearLayout
+   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <ListView
-            android:id="@+id/resListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+        
+
+            <cn.trinea.android.common.view.DropDownListView
+                android:id="@+id/resListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="false"
+                listViewAttr:isAutoLoadOnBottom="true"
+                listViewAttr:isDropDownStyle="false"
+                listViewAttr:isOnBottomStyle="true" />
+
     </LinearLayout>
 
 </LinearLayout>

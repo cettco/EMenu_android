@@ -53,7 +53,7 @@ public class MenuListActivity extends FragmentActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent();
-			intent.setClass(MenuListActivity.this, ViewCartActivity.class);
+			intent.setClass(MenuListActivity.this, CartActivity.class);
 			startActivity(intent);
 			
 		}
