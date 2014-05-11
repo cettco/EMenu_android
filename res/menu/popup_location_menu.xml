@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item  
+        android:id="@+id/locationone"  
+        android:title="黄浦区"/>  
+      
+    <item  
+        android:id="@+id/locationtwo"  
+        android:title="卢湾区"/>  
+        
+    <item  
+        android:id="@+id/locationthree"  
+        android:title="徐汇区"/>
+</menu>

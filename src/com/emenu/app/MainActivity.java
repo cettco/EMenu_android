@@ -9,6 +9,7 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import com.emenu.app.R;
 import com.emenu.app.activity.MenuListActivity;
 import com.emenu.app.activity.MipcaActivityCapture;
+import com.emenu.app.activity.RestaurantListActivity;
 import com.emenu.app.adapter.ImagePagerAdapter;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -112,7 +113,7 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, MenuListActivity.class);
+			intent.setClass(MainActivity.this, RestaurantListActivity.class);
 			startActivity(intent);
 			
 		}

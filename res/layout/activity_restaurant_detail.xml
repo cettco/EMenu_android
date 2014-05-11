@@ -436,6 +436,7 @@
         android:paddingTop="3.0dip" >
 
         <TextView
+            android:id="@+id/resDetailOrderBtn"
             android:layout_width="0.0px"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"

@@ -31,7 +31,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MenuListFragment extends Fragment {
+public class MenuListFragment extends Fragment{
 
 	private static final String KEY_CONTENT = "MenuListFragment:Content";
 	public static final String imageUrl = "http:////www.google.com//ig//images//weather//mostly_sunny.gif";
@@ -39,12 +39,45 @@ public class MenuListFragment extends Fragment {
 	private View listView;
 	private View mView;
 	private ArrayList<MenuItemEntity> itemList;
+	MenuListItemAdapter adapter;
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		System.out.println("ondestroy");
+	}
+
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		System.out.println("destroyview");
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		System.out.println("onpause");
+	}
+
+	View fragmentView;
+	ListView mListView;
 	
 	public static MenuListFragment newInstance(int catId) {
 		MenuListFragment fragment = new MenuListFragment();
 		fragment.catId = catId;
         return fragment;
     }
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		System.out.println("oncreateactivity");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -52,23 +85,70 @@ public class MenuListFragment extends Fragment {
 //		if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
 //            mContent = savedInstanceState.getString(KEY_CONTENT);
 //        }
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), "createView", Toast.LENGTH_SHORT).show();
+		System.out.println("oncreate");
 		itemList = new ArrayList<MenuItemEntity>();		
 		for(int i = 0;i<10;i++)
 		{
 			MenuItemEntity item = new MenuItemEntity("test","test","test");
 			itemList.add(item);
 		}
-		ListView mListView = new ListView(getActivity());
+		adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
 		
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		System.out.println("oncreateactivity");
+		if(adapter==null)
+		{
+			adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+		}
+//		if ((fragmentView != null)) 
+//		{
+//          //mContent = savedInstanceState.getString(KEY_CONTENT);
+//			System.out.println("not null");
+//			return fragmentView;
+//		}
+//		else 
+//		{
+//			System.out.println("null");
+//			//adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+//			//savedInstanceState.putString(KEY_CONTENT, "abc");
+//			itemList = new ArrayList<MenuItemEntity>();		
+//			for(int i = 0;i<10;i++)
+//			{
+//				MenuItemEntity item = new MenuItemEntity("test","test","test");
+//				itemList.add(item);
+//			}
+//			//LayoutInflater lf = getActivity().getLayoutInflater();
+//			fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
+//			//mListView = (ListView)getActivity().findViewById(R.id.restList);
+//			mListView = (ListView)fragmentView.findViewById(R.id.restList);
+//			mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//				@Override
+//				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//						long arg3) {
+//					// TODO Auto-generated method stub
+//					Intent intent = new Intent();
+//					intent.setClass(getActivity(), RestaurantDetailActivity.class);
+//					startActivity(intent);
+//				}
+//				
+//			});
+//			adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+//			mListView.setAdapter(adapter);
+//			return fragmentView;
+//		}
+//		itemList = new ArrayList<MenuItemEntity>();		
+//		for(int i = 0;i<10;i++)
+//		{
+//			MenuItemEntity item = new MenuItemEntity("test","test","test");
+//			itemList.add(item);
+//		}
 		//LayoutInflater lf = getActivity().getLayoutInflater();
-		View fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
+		fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
 		mListView = (ListView)fragmentView.findViewById(R.id.restList);
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,13 +163,9 @@ public class MenuListFragment extends Fragment {
 			}
 			
 		});
-		final MenuListItemAdapter adapter = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+		//adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
 		mListView.setAdapter(adapter);
 		return fragmentView;
-		//return super.onCreateView(inflater, container, savedInstanceState);
-//		TextView v = new TextView(getActivity());
-//		v.setText("hello world");
-//		return v;
 	}
 	
 	@Override
@@ -97,7 +173,7 @@ public class MenuListFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		Toast.makeText(getActivity(), "save state", Toast.LENGTH_SHORT).show();
-		//outState.putString(KEY_CONTENT, mContent);
+		outState.putString(KEY_CONTENT, "abc");
 	}
 //	@Override
 //	public View onCreateView(LayoutInflater inflater, ViewGroup container,
