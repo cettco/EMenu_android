@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import cn.trinea.android.common.service.impl.ImageCache;
 import cn.trinea.android.common.util.CacheManager;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.entities.MenuItemEntity;
 import com.emenu.app.utils.HttpConnection;
@@ -23,8 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
-
-	public static final ImageCache IMAGE_CACHE = CacheManager.getImageCache();
 	private List<MenuItemEntity> list;
 	private Context context;
 
@@ -58,7 +57,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		        itemTitleView.setText(response);
 		    }
 		});
-		IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
+		Data.IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getItemText());
 

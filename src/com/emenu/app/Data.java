@@ -1,9 +1,12 @@
 package com.emenu.app;
 
+import cn.trinea.android.common.service.impl.ImageCache;
+import cn.trinea.android.common.util.CacheManager;
 import android.app.Application;
 
 public class Data extends Application {
 
+	public static final ImageCache IMAGE_CACHE = CacheManager.getImageCache();
 	private String baseUrl;
 	public String getBaseUrl()
 	{
