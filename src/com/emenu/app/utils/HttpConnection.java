@@ -10,4 +10,12 @@ public class HttpConnection {
 	  public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
 	      client.post(url, params, responseHandler);
 	  }
+	  
+	  public static void get(String url, AsyncHttpResponseHandler responseHandler){
+		  client.get(url, responseHandler);
+	  }
+	  
+	  public static void post(String url, AsyncHttpResponseHandler responseHandler) {
+	      client.post(url, responseHandler);
+	  }
 }

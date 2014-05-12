@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
+import com.emenu.app.utils.HttpConnection;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,6 +44,7 @@ public class MenuListFragment extends Fragment{
 	private View listView;
 	private View mView;
 	private ArrayList<MenuItemEntity> itemList;
+	private JSONArray cateItemArray;
 	MenuListItemAdapter adapter;
 	
 	@Override
@@ -71,6 +77,14 @@ public class MenuListFragment extends Fragment{
         return fragment;
     }
 	
+	public static MenuListFragment newInstance(JSONArray cateItemArray) {
+		MenuListFragment fragment = new MenuListFragment();
+		//fragment.catId = catId;
+		//fragment.
+		fragment.cateItemArray = cateItemArray;
+        return fragment;
+    }
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -87,10 +101,18 @@ public class MenuListFragment extends Fragment{
 //        }
 		System.out.println("oncreate");
 		itemList = new ArrayList<MenuItemEntity>();		
-		for(int i = 0;i<10;i++)
+		for(int i = 0;i<cateItemArray.length();i++)
 		{
-			MenuItemEntity item = new MenuItemEntity("test","test","test");
-			itemList.add(item);
+			try {
+				JSONArray itemArray = cateItemArray.getJSONArray(i);
+				MenuItemEntity item = new MenuItemEntity(itemArray.getString(0),""+itemArray.getDouble(1),itemArray.getString(2));
+				itemList.add(item);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*MenuItemEntity item = new MenuItemEntity("test","test","test");
+			itemList.add(item);*/
 		}
 		adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
 		
@@ -147,7 +169,7 @@ public class MenuListFragment extends Fragment{
 //			MenuItemEntity item = new MenuItemEntity("test","test","test");
 //			itemList.add(item);
 //		}
-		//LayoutInflater lf = getActivity().getLayoutInflater();
+		//LayoutInflater lf = getActivity().getLayoutInflater()
 		fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
 		mListView = (ListView)fragmentView.findViewById(R.id.restList);

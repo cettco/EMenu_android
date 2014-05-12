@@ -49,17 +49,19 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		TextView itemTextView = (TextView) rowView.findViewById(R.id.itemText);
 		
 		//imageView.setImageResource(R.drawable.pic1);
-		String url = "http://www.ezhi.net/api/test/index.php";
+/*		String url = "http://www.ezhi.net/api/test/index.php";
 		HttpConnection.get(url, null, new AsyncHttpResponseHandler() {
 		    @Override
 		    public void onSuccess(String response) {
 		        System.out.println("response:"+response);
 		        itemTitleView.setText(response);
 		    }
-		});
-		Data.IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
+		});*/
+		//---Data.IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
+		Data.IMAGE_CACHE.get(item.getItemPicUrl(), imageView);
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getItemText());
+		itemTitleView.setText(item.getItemTitle());
 
 		return rowView;
 	}
