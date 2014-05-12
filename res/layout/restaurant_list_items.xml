@@ -13,7 +13,9 @@
         <ImageView
             android:id="@+id/itemPic"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:src="@drawable/dish"
+             />
     </LinearLayout>
 
     <LinearLayout
