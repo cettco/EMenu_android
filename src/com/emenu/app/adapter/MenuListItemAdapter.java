@@ -58,7 +58,10 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		    }
 		});*/
 		//---Data.IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
-		Data.IMAGE_CACHE.get(item.getItemPicUrl(), imageView);
+		if(!Data.IMAGE_CACHE.get(item.getItemPicUrl(), imageView))
+		{
+			imageView.setImageResource(R.drawable.pic1);
+		}
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getItemText());
 		itemTitleView.setText(item.getItemTitle());
