@@ -51,21 +51,18 @@ public class MenuListFragment extends Fragment{
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		System.out.println("ondestroy");
 	}
 
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		System.out.println("destroyview");
 	}
 
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		System.out.println("onpause");
 	}
 
 	View fragmentView;
@@ -99,7 +96,6 @@ public class MenuListFragment extends Fragment{
 //		if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
 //            mContent = savedInstanceState.getString(KEY_CONTENT);
 //        }
-		System.out.println("oncreate");
 		itemList = new ArrayList<MenuItemEntity>();		
 		for(int i = 0;i<cateItemArray.length();i++)
 		{
