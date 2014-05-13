@@ -1595,6 +1595,7 @@ containing a value of this type.
         public static final int locationtwo=0x7f0a007f;
         public static final int menuListIndicator=0x7f0a005a;
         public static final int menuListPager=0x7f0a005b;
+        public static final int menuListView=0x7f0a0078;
         public static final int menulist_progressbar=0x7f0a005e;
         public static final int middle=0x7f0a0016;
         public static final int never=0x7f0a000e;
@@ -1610,7 +1611,6 @@ containing a value of this type.
         public static final int resListView=0x7f0a0067;
         public static final int restAddr=0x7f0a0061;
         public static final int restDetail=0x7f0a0063;
-        public static final int restList=0x7f0a0078;
         public static final int restName=0x7f0a0060;
         public static final int restTel=0x7f0a0062;
         public static final int restart_preview=0x7f0a0026;
@@ -1719,8 +1719,8 @@ containing a value of this type.
         public static final int drop_down_list_footer=0x7f03001f;
         public static final int drop_down_list_header=0x7f030020;
         public static final int fragment_menulist=0x7f030021;
-        public static final int restaurant_list=0x7f030022;
-        public static final int restaurant_list_items=0x7f030023;
+        public static final int menu_list=0x7f030022;
+        public static final int menu_list_item=0x7f030023;
         public static final int support_simple_spinner_dropdown_item=0x7f030024;
     }
     public static final class menu {

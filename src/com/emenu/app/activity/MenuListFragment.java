@@ -13,6 +13,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import cn.trinea.android.common.view.DropDownListView;
+import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
+
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
@@ -27,6 +30,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -47,6 +51,9 @@ public class MenuListFragment extends Fragment{
 	private JSONArray cateItemArray;
 	MenuListItemAdapter adapter;
 	
+	private View fragmentView;
+	private DropDownListView mListView;
+	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -65,8 +72,7 @@ public class MenuListFragment extends Fragment{
 		super.onPause();
 	}
 
-	View fragmentView;
-	ListView mListView;
+	
 	
 	public static MenuListFragment newInstance(int catId) {
 		MenuListFragment fragment = new MenuListFragment();
@@ -110,7 +116,7 @@ public class MenuListFragment extends Fragment{
 			/*MenuItemEntity item = new MenuItemEntity("test","test","test");
 			itemList.add(item);*/
 		}
-		adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+		adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
 		
 	}
 
@@ -120,55 +126,25 @@ public class MenuListFragment extends Fragment{
 		System.out.println("oncreateactivity");
 		if(adapter==null)
 		{
-			adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
+			adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
 		}
-//		if ((fragmentView != null)) 
-//		{
-//          //mContent = savedInstanceState.getString(KEY_CONTENT);
-//			System.out.println("not null");
-//			return fragmentView;
-//		}
-//		else 
-//		{
-//			System.out.println("null");
-//			//adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
-//			//savedInstanceState.putString(KEY_CONTENT, "abc");
-//			itemList = new ArrayList<MenuItemEntity>();		
-//			for(int i = 0;i<10;i++)
-//			{
-//				MenuItemEntity item = new MenuItemEntity("test","test","test");
-//				itemList.add(item);
-//			}
-//			//LayoutInflater lf = getActivity().getLayoutInflater();
-//			fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
-//			//mListView = (ListView)getActivity().findViewById(R.id.restList);
-//			mListView = (ListView)fragmentView.findViewById(R.id.restList);
-//			mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//				@Override
-//				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//						long arg3) {
-//					// TODO Auto-generated method stub
-//					Intent intent = new Intent();
-//					intent.setClass(getActivity(), RestaurantDetailActivity.class);
-//					startActivity(intent);
-//				}
-//				
-//			});
-//			adapter  = new MenuListItemAdapter(getActivity(), R.layout.restaurant_list_items,itemList);
-//			mListView.setAdapter(adapter);
-//			return fragmentView;
-//		}
-//		itemList = new ArrayList<MenuItemEntity>();		
-//		for(int i = 0;i<10;i++)
-//		{
-//			MenuItemEntity item = new MenuItemEntity("test","test","test");
-//			itemList.add(item);
-//		}
-		//LayoutInflater lf = getActivity().getLayoutInflater()
-		fragmentView = inflater.inflate(R.layout.restaurant_list, container, false);
+		fragmentView = inflater.inflate(R.layout.menu_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
-		mListView = (ListView)fragmentView.findViewById(R.id.restList);
+		mListView = (DropDownListView)fragmentView.findViewById(R.id.menuListView);
+		mListView.setOnDropDownListener(new OnDropDownListener() {
+			 
+            @Override
+            public void onDropDown() {
+                Toast.makeText(getActivity(), "refresh clicke", Toast.LENGTH_SHORT).show();
+            }
+        });
+		mListView.setOnBottomListener(new OnClickListener() {
+			 
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "more clicke", Toast.LENGTH_SHORT).show();
+            }
+        });
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override

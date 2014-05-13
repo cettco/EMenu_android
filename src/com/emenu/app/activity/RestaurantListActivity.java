@@ -43,7 +43,7 @@ public class RestaurantListActivity extends Activity {
 			RestaurantItemEntity item = new RestaurantItemEntity("test","test", "test");
 			restaurantItemList.add(item);
 		}
-		restaurantListAdapter  = new RestaurantListAdapter(this, R.layout.restaurant_list_items,restaurantItemList);
+		restaurantListAdapter  = new RestaurantListAdapter(this, R.layout.menu_list_item,restaurantItemList);
 		resListView.setAdapter(restaurantListAdapter);
 		resListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -554,6 +554,7 @@ int id locationthree 0x7f0a0080
 int id locationtwo 0x7f0a007f
 int id menuListIndicator 0x7f0a005a
 int id menuListPager 0x7f0a005b
+int id menuListView 0x7f0a0078
 int id menulist_progressbar 0x7f0a005e
 int id middle 0x7f0a0016
 int id never 0x7f0a000e
@@ -569,7 +570,6 @@ int id resDetailOrderBtn 0x7f0a0065
 int id resListView 0x7f0a0067
 int id restAddr 0x7f0a0061
 int id restDetail 0x7f0a0063
-int id restList 0x7f0a0078
 int id restName 0x7f0a0060
 int id restTel 0x7f0a0062
 int id restart_preview 0x7f0a0026
@@ -652,8 +652,8 @@ int layout cart_list_item 0x7f03001e
 int layout drop_down_list_footer 0x7f03001f
 int layout drop_down_list_header 0x7f030020
 int layout fragment_menulist 0x7f030021
-int layout restaurant_list 0x7f030022
-int layout restaurant_list_items 0x7f030023
+int layout menu_list 0x7f030022
+int layout menu_list_item 0x7f030023
 int layout support_simple_spinner_dropdown_item 0x7f030024
 int menu main 0x7f0d0000
 int menu popup_location_menu 0x7f0d0001

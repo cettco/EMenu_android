@@ -34,7 +34,7 @@ public class RestaurantListAdapter extends ArrayAdapter<RestaurantItemEntity> {
 		RestaurantItemEntity item =list.get(position);
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.restaurant_list_items, parent,
+		View rowView = inflater.inflate(R.layout.menu_list_item, parent,
 				false);
 
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.itemPic);
