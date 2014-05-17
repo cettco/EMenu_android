@@ -3,6 +3,11 @@ package com.emenu.app.activity;
 import java.io.IOException;
 import java.util.Vector;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -22,8 +27,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.emenu.app.R;
+import com.emenu.app.entities.RestaurantItemEntity;
+import com.emenu.app.utils.HttpConnection;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.mining.app.zxing.camera.CameraManager;
 import com.mining.app.zxing.decoding.CaptureActivityHandler;
 import com.mining.app.zxing.decoding.InactivityTimer;
@@ -108,7 +117,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	}
 	
 	/**
-	 * ����ɨ����
+	 * ����ɨ����
 	 * @param result
 	 * @param barcode
 	 */
@@ -127,6 +136,46 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			this.setResult(RESULT_OK, resultIntent);
 		}
 		MipcaActivityCapture.this.finish();
+		/*Intent toIntent = new Intent();
+		RestaurantItemEntity restaurantItemEntity = new RestaurantItemEntity("null", "Name", "aaa", "te", "1", "1", "description", "12312"); 
+		toIntent.putExtra("RestaurantItemEntity", restaurantItemEntity);
+		toIntent.setClass(MipcaActivityCapture.this, RestaurantDetailActivity.class);
+		startActivity(toIntent);*/
+	}
+	
+	private boolean processResult(String qrString){
+		int restID,tableID;
+		RequestParams params = new RequestParams();
+		params.put("qrcode", qrString);
+		HttpConnection.post("http://qianglee.com/orderonline/index.php/UserControl/CheckCode",params, new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(statusCode, response);
+				try {
+					if(response.getString("message").equals("Select Ok")){
+						JSONObject result = response.getJSONObject("result");
+						JSONObject resultFromQRCode = result.getJSONObject("tableinfo");
+						
+						
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		});
+		
+		
+			// TODO: handle exception
+/*			System.out.println("Get restaurant information from Server Error!");
+			Toast.makeText(MipcaActivityCapture.this, "您扫描的二维码不能获取到数据", Toast.LENGTH_LONG);
+			return false;*/
+		
+		return true;
 	}
 	
 	private void initCamera(SurfaceHolder surfaceHolder) {

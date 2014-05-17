@@ -2,6 +2,7 @@ package com.emenu.app.adapter;
 
 import java.util.List;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.entities.MenuItemEntity;
 import com.emenu.app.entities.RestaurantItemEntity;
@@ -34,17 +35,17 @@ public class RestaurantListAdapter extends ArrayAdapter<RestaurantItemEntity> {
 		RestaurantItemEntity item =list.get(position);
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.menu_list_item, parent,
+		View rowView = inflater.inflate(R.layout.restaurant_list_item, parent,
 				false);
 
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.itemPic);
-		final TextView itemTitleView = (TextView) rowView.findViewById(R.id.itemTitle);
+		ImageView imageView = (ImageView) rowView.findViewById(R.id.restListItemPic);
+		final TextView itemTitleView = (TextView) rowView.findViewById(R.id.restListItemTitle);
 		itemTitleView.setText(item.getName());
-		TextView itemTextView = (TextView) rowView.findViewById(R.id.itemText);
+		TextView itemTextView = (TextView) rowView.findViewById(R.id.restListItemText);
 		
-		imageView.setImageResource(R.drawable.pic1);
-		String url = "http://www.ezhi.net/api/test/index.php";
-		//IMAGE_CACHE.get("http://d.hiphotos.baidu.com/image/pic/item/9d82d158ccbf6c81db35544dbe3eb13533fa4010.jpg", imageView);
+		//imageView.setImageResource(R.drawable.pic1);
+		String url = item.getUrl();
+		Data.IMAGE_CACHE.get(item.getUrl(), imageView);
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getAddress());
 

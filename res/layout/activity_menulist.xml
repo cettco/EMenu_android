@@ -52,6 +52,6 @@
         android:layout_gravity="center"
         style="?android:attr/progressBarStyleLarge"
         >
-    </ProgressBar>
+</ProgressBar>
 
  </FrameLayout>

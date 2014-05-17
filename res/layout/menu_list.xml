@@ -14,7 +14,7 @@
                 android:layout_height="wrap_content"
                 android:drawSelectorOnTop="true"
                 listViewAttr:isAutoLoadOnBottom="false"
-                listViewAttr:isDropDownStyle="true"
-                listViewAttr:isOnBottomStyle="true" />
+                listViewAttr:isDropDownStyle="false"
+                listViewAttr:isOnBottomStyle="false" />
 
 </LinearLayout>

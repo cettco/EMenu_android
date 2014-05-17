@@ -11,6 +11,7 @@ import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListAdapter;
 import com.emenu.app.utils.HttpConnection;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.viewpagerindicator.TabPageIndicator;
 
 import android.app.Activity;
@@ -58,7 +59,13 @@ public class MenuListActivity extends FragmentActivity {
 
 	private void onSetCategoryView() {
 		// TODO Auto-generated method stub
-		HttpConnection.post("http://www.qianglee.com/test.php",
+		Intent intent = getIntent();
+		String menuID = intent.getStringExtra("menuid");
+		RequestParams params = new RequestParams();
+		params.put("menuid", menuID);
+		Log.i("cate","menuid="+menuID);
+		
+		HttpConnection.post("http://qianglee.com/orderonline/index.php/ClientServer/MenuList", params, 
 				new JsonHttpResponseHandler() {
 
 					@Override
@@ -66,10 +73,10 @@ public class MenuListActivity extends FragmentActivity {
 						// TODO Auto-generated method stub
 						// super.onSuccess(response);
 						progressBar.setVisibility(View.INVISIBLE);
-						System.out.println("success:" + response);
+						//System.out.println("success:" + response);
 
 						try {
-							JSONArray categoryJsonArray = response
+/*							JSONArray categoryJsonArray = response
 									.getJSONArray("cat");
 							int len = categoryJsonArray.length();
 							for (int i = 0; i < len; i++) {
@@ -84,8 +91,20 @@ public class MenuListActivity extends FragmentActivity {
 												.getJSONArray(categoryJsonArray
 														.getString(i))));
 								titleList.add(categoryJsonArray.getString(i));
+							}*/
+							
+							if(response.getString("message").equals("Select Ok")){
+								JSONObject result = response.getJSONObject("result");
+								JSONArray restaurantListArray = result.getJSONArray("menulist");
+								int len = restaurantListArray.length();
+								for(int i=0;i<len;i++){
+									JSONObject restaurantJsonObject = restaurantListArray.getJSONObject(i);
+									int categoryidID = Integer.parseInt(restaurantJsonObject.getString("categoryid"));
+									pagerArrayList.add(MenuListFragment.newInstance(categoryidID));
+									titleList.add(restaurantJsonObject.getString("categoryname"));
+									
+								}
 							}
-
 							adapter.notifyDataSetChanged();
 							indicator.notifyDataSetChanged();
 						} catch (JSONException e) {

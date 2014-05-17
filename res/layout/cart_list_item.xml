@@ -16,7 +16,7 @@
 	    android:layout_marginRight="5dip">
         
 		<ImageView
-		    android:id="@+id/list_image"
+		    android:id="@+id/cartImage"
 		    android:layout_width="50dip"
 		    android:layout_height="50dip"
 		    android:src="@drawable/dish" />
@@ -26,7 +26,7 @@
 	<!-- Title Of Song-->
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/cartTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
@@ -40,10 +40,10 @@
 	<!-- Artist Name -->
 
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/cartPrice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/cartTitle"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="菜品价格"
@@ -57,7 +57,7 @@
          android:id="@+id/deleteDish"
          android:layout_width="30sp"
          android:layout_height="30sp"
-         android:layout_below="@+id/artist"
+         android:layout_below="@+id/cartPrice"
          android:layout_alignParentRight="true"
          android:layout_marginTop="5sp"
          android:text="-"
@@ -67,16 +67,16 @@
          android:id="@+id/addDish"
          android:layout_width="30sp"
          android:layout_height="30sp"
-         android:layout_below="@+id/artist"
+         android:layout_below="@+id/cartPrice"
          android:layout_toLeftOf="@+id/deleteDish"
          android:layout_marginTop="5sp"
          android:text="+"
          android:textSize="12sp" />
      <TextView
-         android:id="@+id/amount"
+         android:id="@+id/cartAmount"
          android:layout_width="30sp"
          android:layout_height="25sp"
-         android:layout_below="@+id/artist"
+         android:layout_below="@+id/cartPrice"
          android:layout_toLeftOf="@+id/addDish"
          android:layout_marginTop="5sp"
          android:layout_marginRight="5sp"

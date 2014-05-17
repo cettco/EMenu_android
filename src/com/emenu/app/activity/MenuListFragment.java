@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.trinea.android.common.view.DropDownListView;
 import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
@@ -21,12 +22,15 @@ import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
 import com.emenu.app.utils.HttpConnection;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,8 +106,10 @@ public class MenuListFragment extends Fragment{
 //		if ((savedInstanceState != null) && savedInstanceState.containsKey(KEY_CONTENT)) {
 //            mContent = savedInstanceState.getString(KEY_CONTENT);
 //        }
-		itemList = new ArrayList<MenuItemEntity>();		
-		for(int i = 0;i<cateItemArray.length();i++)
+		itemList = new ArrayList<MenuItemEntity>();
+		adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
+		getJsonSetEntity();
+		/*for(int i = 0;i<cateItemArray.length();i++)
 		{
 			try {
 				JSONArray itemArray = cateItemArray.getJSONArray(i);
@@ -113,11 +119,55 @@ public class MenuListFragment extends Fragment{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*MenuItemEntity item = new MenuItemEntity("test","test","test");
-			itemList.add(item);*/
-		}
-		adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
+			MenuItemEntity item = new MenuItemEntity("test","test","test");
+			itemList.add(item);
+		}*/
 		
+		
+	}
+	
+	private void getJsonSetEntity(){
+		RequestParams params = new RequestParams();
+		params.put("categoryid", String.valueOf(catId));
+
+		HttpConnection.post("http://qianglee.com/orderonline/index.php/ClientServer/MenuItemList",params, new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(JSONObject response) {
+				// TODO Auto-generated method stub
+				super.onSuccess(response);
+				
+				try {
+					if(response.getString("message").equals("Select Ok")){
+						JSONObject result = response.getJSONObject("result");
+						JSONArray restaurantListArray = result.getJSONArray("menuitemlist");
+						int len = restaurantListArray.length();
+						for(int i=0;i<len;i++){
+							JSONObject restaurantJsonObject = restaurantListArray.getJSONObject(i);
+/*							Log.i("cate", "itemid:"+restaurantJsonObject.getString("itemid"));
+							Log.i("cate", "itemname:"+restaurantJsonObject.getString("itemname"));
+							Log.i("cate", "itemunit:"+restaurantJsonObject.getString("itemunit"));
+							Log.i("cate", "itemprice:"+restaurantJsonObject.getString("itemprice"));
+							Log.i("cate", "description:"+restaurantJsonObject.getString("description"));*/
+							String itemID = restaurantJsonObject.getString("itemid");
+							String itemName = restaurantJsonObject.getString("itemname");
+							String itemUnit =  restaurantJsonObject.getString("itemunit");
+							String itemPrice = restaurantJsonObject.getString("itemprice");
+							String description = restaurantJsonObject.getString("description");
+							MenuItemEntity item = new MenuItemEntity(itemName, itemPrice, "http://qianglee.com", itemID, itemUnit, description);
+							itemList.add(item);
+						}
+						adapter.notifyDataSetChanged();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Log.i("cate", "Json error!");
+				}
+				
+			}
+			
+		});
 	}
 
 	@Override
@@ -131,7 +181,7 @@ public class MenuListFragment extends Fragment{
 		fragmentView = inflater.inflate(R.layout.menu_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
 		mListView = (DropDownListView)fragmentView.findViewById(R.id.menuListView);
-		mListView.setOnDropDownListener(new OnDropDownListener() {
+/*		mListView.setOnDropDownListener(new OnDropDownListener() {
 			 
             @Override
             public void onDropDown() {
@@ -144,15 +194,17 @@ public class MenuListFragment extends Fragment{
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "more clicke", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				MenuItemEntity item = itemList.get(arg2-1);
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), RestaurantDetailActivity.class);
+				intent.putExtra("MenuItemEntity", item);
+				intent.setClass(getActivity(), MenuItemDetailActivity.class);
 				startActivity(intent);
 			}
 			
