@@ -15,17 +15,21 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 	private List<MenuItemEntity> list;
 	private Context context;
+	private Button addToCartButton;
 
 	public MenuListItemAdapter(Context context, int resource,
 			List<MenuItemEntity> objects) {
@@ -47,7 +51,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.itemPic);
 		final TextView itemTitleView = (TextView) rowView.findViewById(R.id.itemTitle);
 		TextView itemTextView = (TextView) rowView.findViewById(R.id.itemText);
-		
+		addToCartButton = (Button)rowView.findViewById(R.id.itemAddToCartBtn);
 		//imageView.setImageResource(R.drawable.pic1);
 /*		String url = "http://www.ezhi.net/api/test/index.php";
 		HttpConnection.get(url, null, new AsyncHttpResponseHandler() {
@@ -62,8 +66,32 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getItemText());
 		itemTitleView.setText(item.getItemTitle());
+		addToCartButton.setOnClickListener(new lvButtonListener(position));
 
 		return rowView;
+	}
+	
+	class lvButtonListener implements OnClickListener{
+		private int position;
+		
+		public lvButtonListener(int pos) {
+			// TODO Auto-generated constructor stub
+			position = pos;
+		}
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			MenuItemEntity item =list.get(position);
+			Log.i("cate", "id:"+item.getItemID());
+			int vid = v.getId();
+			if(vid == addToCartButton.getId()){
+				Log.i("cate", "Clicked"+vid);
+				Log.i("cate", "postion"+position);
+			}
+		}
+		
+		
 	}
 
 }

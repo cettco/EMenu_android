@@ -2,6 +2,7 @@ package com.emenu.app.activity;
 
 import com.emenu.app.Data;
 import com.emenu.app.R;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.entities.RestaurantItemEntity;
 
 import android.app.Activity;
@@ -24,6 +25,8 @@ public class RestaurantDetailActivity extends Activity {
 	private TextView restTel = null;
 	private TextView restDetail = null;
 	private RestaurantItemEntity restaurantItemEntity = null;
+	private QROrderEntity qrOrderEntity = null;
+	private TextView restDetailTableNo = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class RestaurantDetailActivity extends Activity {
 	private void setIntentContent(){
 		Intent intent = getIntent();
 		restaurantItemEntity = (RestaurantItemEntity)intent.getSerializableExtra("RestaurantItemEntity");
+		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
 	}
 
 	private void onSetView(){
@@ -49,6 +53,7 @@ public class RestaurantDetailActivity extends Activity {
 		restDetailAddr = (TextView)findViewById(R.id.restDetailAddr);
 		restTel = (TextView)findViewById(R.id.restTel);
 		restDetail = (TextView)findViewById(R.id.restDetail);
+		restDetailTableNo = (TextView)findViewById(R.id.restDetailTableNo);
 		
 		restDetailOrder.setOnClickListener(new OnClickListener() {
 			
@@ -58,9 +63,13 @@ public class RestaurantDetailActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(RestaurantDetailActivity.this,MenuListActivity.class);
 				intent.putExtra("menuid", restaurantItemEntity.getMenuID());
-				startActivity(intent);				
+				intent.putExtra("QROrderEntity", qrOrderEntity);
+				startActivity(intent);
 			}
 		});
+		if (qrOrderEntity!=null) {
+			restDetailTableNo.setText("桌号: " + qrOrderEntity.getTableID());
+		}
 		restDetailName.setText(restaurantItemEntity.getName());
 		Data.IMAGE_CACHE.get(restaurantItemEntity.getUrl(),restPic);
 		restDetailAddr.setText(restaurantItemEntity.getAddress());

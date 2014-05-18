@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListAdapter;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.utils.HttpConnection;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -30,11 +31,12 @@ import android.widget.ProgressBar;
 public class MenuListActivity extends FragmentActivity {
 	private ArrayList<MenuListFragment> pagerArrayList;
 	private ArrayList<String> titleList;
-	private Button viewCartBtn;
+	private Button viewCartBtn, callServiceBtn;
 	private FragmentPagerAdapter adapter;
 	private ViewPager pager;
 	private TabPageIndicator indicator;
 	private ProgressBar progressBar;
+	private QROrderEntity qrOrderEntity = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,12 @@ public class MenuListActivity extends FragmentActivity {
 		titleList = new ArrayList<String>();
 
 		progressBar = (ProgressBar) findViewById(R.id.menulist_progressbar);
+		
 		viewCartBtn = (Button) findViewById(R.id.viewCartBtn);
 		viewCartBtn.setOnClickListener(viewCartBtncClickListener);
+		callServiceBtn = (Button)findViewById(R.id.callServiceBtn);
+		callServiceBtn.setOnClickListener(viewCartBtncClickListener);
+		
 		pager = (ViewPager) findViewById(R.id.menuListPager);
 		adapter = new MenuListAdapter(getSupportFragmentManager(),
 				pagerArrayList, titleList);
@@ -61,6 +67,7 @@ public class MenuListActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		Intent intent = getIntent();
 		String menuID = intent.getStringExtra("menuid");
+		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
 		RequestParams params = new RequestParams();
 		params.put("menuid", menuID);
 		Log.i("cate","menuid="+menuID);
@@ -76,23 +83,6 @@ public class MenuListActivity extends FragmentActivity {
 						//System.out.println("success:" + response);
 
 						try {
-/*							JSONArray categoryJsonArray = response
-									.getJSONArray("cat");
-							int len = categoryJsonArray.length();
-							for (int i = 0; i < len; i++) {
-								JSONArray cateItemArray = response
-										.getJSONArray(categoryJsonArray
-												.getString(i));
-
-								Log.i("cate", categoryJsonArray.getString(i));
-								String aString = categoryJsonArray.getString(i);
-								pagerArrayList.add(MenuListFragment
-										.newInstance(response
-												.getJSONArray(categoryJsonArray
-														.getString(i))));
-								titleList.add(categoryJsonArray.getString(i));
-							}*/
-							
 							if(response.getString("message").equals("Select Ok")){
 								JSONObject result = response.getJSONObject("result");
 								JSONArray restaurantListArray = result.getJSONArray("menulist");
@@ -102,7 +92,6 @@ public class MenuListActivity extends FragmentActivity {
 									int categoryidID = Integer.parseInt(restaurantJsonObject.getString("categoryid"));
 									pagerArrayList.add(MenuListFragment.newInstance(categoryidID));
 									titleList.add(restaurantJsonObject.getString("categoryname"));
-									
 								}
 							}
 							adapter.notifyDataSetChanged();
@@ -143,8 +132,19 @@ public class MenuListActivity extends FragmentActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent();
-			intent.setClass(MenuListActivity.this, CartActivity.class);
-			startActivity(intent);
+			intent.putExtra("QROrderEntity", qrOrderEntity);
+			switch (v.getId()) {
+			case R.id.viewCartBtn:
+				intent.setClass(MenuListActivity.this, CartActivity.class);
+				startActivity(intent);
+				break;
+
+			case R.id.callServiceBtn:
+				intent.setClass(MenuListActivity.this, CallServiceActivity.class);
+				startActivity(intent);
+				break;
+			}
+			
 
 		}
 	};

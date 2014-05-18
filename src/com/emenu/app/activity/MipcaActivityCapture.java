@@ -18,6 +18,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.emenu.app.R;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.entities.RestaurantItemEntity;
 import com.emenu.app.utils.HttpConnection;
 import com.google.zxing.BarcodeFormat;
@@ -53,6 +55,10 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	private boolean playBeep;
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
+	private boolean isCodeCorrect = false;
+	private RestaurantItemEntity restaurantItemEntity = null;
+	private QROrderEntity qrOrderEntity = null;
+	private String qrCodeString;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -128,6 +134,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		if (resultString.equals("")) {
 			Toast.makeText(MipcaActivityCapture.this, "Scan failed!", Toast.LENGTH_SHORT).show();
 		}else {
+			Toast.makeText(MipcaActivityCapture.this, "正在解析二维码", Toast.LENGTH_LONG).show();
 			Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
@@ -135,16 +142,26 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			resultIntent.putExtras(bundle);
 			this.setResult(RESULT_OK, resultIntent);
 		}
-		MipcaActivityCapture.this.finish();
-		/*Intent toIntent = new Intent();
-		RestaurantItemEntity restaurantItemEntity = new RestaurantItemEntity("null", "Name", "aaa", "te", "1", "1", "description", "12312"); 
-		toIntent.putExtra("RestaurantItemEntity", restaurantItemEntity);
-		toIntent.setClass(MipcaActivityCapture.this, RestaurantDetailActivity.class);
-		startActivity(toIntent);*/
+		qrCodeString = resultString;
+		processResult(resultString);
+		
 	}
 	
-	private boolean processResult(String qrString){
-		int restID,tableID;
+	private void jumpToRestDetailActivity() {
+		// TODO Auto-generated method stub
+		if(isCodeCorrect){
+			Intent toIntent = new Intent();
+			//RestaurantItemEntity restaurantItemEntity = new RestaurantItemEntity("null", "Name", "aaa", "te", "1", "1", "description", "12312"); 
+			toIntent.putExtra("RestaurantItemEntity", restaurantItemEntity);
+			toIntent.putExtra("QROrderEntity", qrOrderEntity);
+			toIntent.setClass(MipcaActivityCapture.this, RestaurantDetailActivity.class);
+			startActivity(toIntent);
+			
+		}
+		MipcaActivityCapture.this.finish();
+	}
+	
+	private void processResult(String qrString){
 		RequestParams params = new RequestParams();
 		params.put("qrcode", qrString);
 		HttpConnection.post("http://qianglee.com/orderonline/index.php/UserControl/CheckCode",params, new JsonHttpResponseHandler(){
@@ -154,28 +171,37 @@ public class MipcaActivityCapture extends Activity implements Callback {
 				// TODO Auto-generated method stub
 				super.onSuccess(statusCode, response);
 				try {
-					if(response.getString("message").equals("Select Ok")){
+					if(response.getString("code").equals("10021")){		
 						JSONObject result = response.getJSONObject("result");
 						JSONObject resultFromQRCode = result.getJSONObject("tableinfo");
-						
-						
+						String urlString = resultFromQRCode.getString("pictureurl");
+						String nameString = resultFromQRCode.getString("restaurantname");
+						String addString = resultFromQRCode.getString("address");
+						String typeString = resultFromQRCode.getString("type");
+						String phoneString = resultFromQRCode.getString("phone");
+						String restIDString = resultFromQRCode.getString("restaurantid");
+						String menuIDString = resultFromQRCode.getString("menuid");
+						String descriptionString = resultFromQRCode.getString("description");
+						String tableNoString = resultFromQRCode.getString("tableno");
+						String tableStatuString = resultFromQRCode.getString("tablestatus");
+						String orderIDString = resultFromQRCode.getString("orderid");
+						restaurantItemEntity = new RestaurantItemEntity(urlString, nameString, addString, typeString, restIDString, menuIDString, descriptionString, phoneString);
+						qrOrderEntity = new QROrderEntity(nameString, restIDString, tableNoString, tableStatuString, orderIDString, qrCodeString);
+						isCodeCorrect = true;
+					}else {
+						Toast.makeText(MipcaActivityCapture.this, "您扫描的二维码不能获取到数据", Toast.LENGTH_LONG).show();
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Toast.makeText(MipcaActivityCapture.this, "您扫描的二维码不能获取到数据", Toast.LENGTH_LONG).show();
 				}
+				jumpToRestDetailActivity();
 				
 			}
-			
+
 		});
 		
-		
-			// TODO: handle exception
-/*			System.out.println("Get restaurant information from Server Error!");
-			Toast.makeText(MipcaActivityCapture.this, "您扫描的二维码不能获取到数据", Toast.LENGTH_LONG);
-			return false;*/
-		
-		return true;
 	}
 	
 	private void initCamera(SurfaceHolder surfaceHolder) {

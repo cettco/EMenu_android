@@ -144,17 +144,14 @@ public class MenuListFragment extends Fragment{
 						int len = restaurantListArray.length();
 						for(int i=0;i<len;i++){
 							JSONObject restaurantJsonObject = restaurantListArray.getJSONObject(i);
-/*							Log.i("cate", "itemid:"+restaurantJsonObject.getString("itemid"));
-							Log.i("cate", "itemname:"+restaurantJsonObject.getString("itemname"));
-							Log.i("cate", "itemunit:"+restaurantJsonObject.getString("itemunit"));
-							Log.i("cate", "itemprice:"+restaurantJsonObject.getString("itemprice"));
-							Log.i("cate", "description:"+restaurantJsonObject.getString("description"));*/
 							String itemID = restaurantJsonObject.getString("itemid");
 							String itemName = restaurantJsonObject.getString("itemname");
 							String itemUnit =  restaurantJsonObject.getString("itemunit");
 							String itemPrice = restaurantJsonObject.getString("itemprice");
 							String description = restaurantJsonObject.getString("description");
-							MenuItemEntity item = new MenuItemEntity(itemName, itemPrice, "http://qianglee.com", itemID, itemUnit, description);
+							String itemPic = restaurantJsonObject.getString("picture");
+							Log.i("cate", itemPic);
+							MenuItemEntity item = new MenuItemEntity(itemName, itemPrice, itemPic, itemID, itemUnit, description);
 							itemList.add(item);
 						}
 						adapter.notifyDataSetChanged();
@@ -201,7 +198,7 @@ public class MenuListFragment extends Fragment{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				MenuItemEntity item = itemList.get(arg2-1);
+				MenuItemEntity item = itemList.get(arg2);
 				Intent intent = new Intent();
 				intent.putExtra("MenuItemEntity", item);
 				intent.setClass(getActivity(), MenuItemDetailActivity.class);

@@ -13,6 +13,7 @@ import cn.trinea.android.common.view.DropDownListView;
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.adapter.RestaurantListAdapter;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.entities.RestaurantItemEntity;
 import com.emenu.app.utils.HttpConnection;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -42,6 +43,7 @@ public class RestaurantListActivity extends Activity {
 	private ProgressBar restaurantProgressBar;
 	private int startRestID = 0;
 	private int len = 0;
+	private QROrderEntity qrOrderEntity = null;
 /*	String urlString = null;
 	String nameString = null;
 	String addString = null;*/
@@ -77,6 +79,7 @@ public class RestaurantListActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(RestaurantListActivity.this, RestaurantDetailActivity.class);
 				intent.putExtra("RestaurantItemEntity", restaurantItemEntity);
+				intent.putExtra("qrOrderEntity", qrOrderEntity);
 				startActivity(intent);
 			}
 			
