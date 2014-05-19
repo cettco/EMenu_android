@@ -10,7 +10,9 @@ import cn.trinea.android.common.util.CacheManager;
 import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.entities.MenuItemEntity;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.utils.HttpConnection;
+import com.emenu.app.utils.ProcessOrder;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -24,19 +26,24 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 	private List<MenuItemEntity> list;
 	private Context context;
 	private Button addToCartButton;
+	private ProcessOrder processOrder;
+	private QROrderEntity qrOrderEntity = null;
+	private LinearLayout itemListLinearLayout;
 
 	public MenuListItemAdapter(Context context, int resource,
-			List<MenuItemEntity> objects) {
+			List<MenuItemEntity> objects, QROrderEntity qrOrderEntity) {
 		super(context, resource, objects);
 		// TODO Auto-generated constructor stub
 		this.list = objects;
 		this.context = context;
+		this.qrOrderEntity = qrOrderEntity;
 	}
 
 	@Override
@@ -52,6 +59,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		final TextView itemTitleView = (TextView) rowView.findViewById(R.id.itemTitle);
 		TextView itemTextView = (TextView) rowView.findViewById(R.id.itemText);
 		addToCartButton = (Button)rowView.findViewById(R.id.itemAddToCartBtn);
+		itemListLinearLayout = (LinearLayout)rowView.findViewById(R.id.menuListItemLinearLayout);
 		//imageView.setImageResource(R.drawable.pic1);
 /*		String url = "http://www.ezhi.net/api/test/index.php";
 		HttpConnection.get(url, null, new AsyncHttpResponseHandler() {
@@ -66,8 +74,13 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 		//itemTitleView.setText(item.getItemTitle());
 		itemTextView.setText(item.getItemText());
 		itemTitleView.setText(item.getItemTitle());
-		addToCartButton.setOnClickListener(new lvButtonListener(position));
-
+		if(qrOrderEntity==null){
+			addToCartButton.setClickable(false);
+			itemListLinearLayout.removeView(addToCartButton);
+		}else{
+			addToCartButton.setOnClickListener(new lvButtonListener(position));
+			processOrder = new ProcessOrder();
+		}
 		return rowView;
 	}
 	
@@ -86,8 +99,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 			Log.i("cate", "id:"+item.getItemID());
 			int vid = v.getId();
 			if(vid == addToCartButton.getId()){
-				Log.i("cate", "Clicked"+vid);
-				Log.i("cate", "postion"+position);
+				processOrder.add(qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", item.getItemID());
 			}
 		}
 		

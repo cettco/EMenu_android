@@ -68,6 +68,9 @@ public class MenuListActivity extends FragmentActivity {
 		Intent intent = getIntent();
 		String menuID = intent.getStringExtra("menuid");
 		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
+		if(qrOrderEntity==null){
+			viewCartBtn.setClickable(false);
+		}
 		RequestParams params = new RequestParams();
 		params.put("menuid", menuID);
 		Log.i("cate","menuid="+menuID);
@@ -90,7 +93,7 @@ public class MenuListActivity extends FragmentActivity {
 								for(int i=0;i<len;i++){
 									JSONObject restaurantJsonObject = restaurantListArray.getJSONObject(i);
 									int categoryidID = Integer.parseInt(restaurantJsonObject.getString("categoryid"));
-									pagerArrayList.add(MenuListFragment.newInstance(categoryidID));
+									pagerArrayList.add(MenuListFragment.newInstance(categoryidID, qrOrderEntity));
 									titleList.add(restaurantJsonObject.getString("categoryname"));
 								}
 							}

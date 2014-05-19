@@ -20,6 +20,7 @@ import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
+import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.utils.HttpConnection;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -53,10 +54,11 @@ public class MenuListFragment extends Fragment{
 	private View mView;
 	private ArrayList<MenuItemEntity> itemList;
 	private JSONArray cateItemArray;
-	MenuListItemAdapter adapter;
+	private MenuListItemAdapter adapter;
 	
 	private View fragmentView;
 	private DropDownListView mListView;
+	private QROrderEntity qrOrderEntity;
 	
 	@Override
 	public void onDestroy() {
@@ -78,9 +80,10 @@ public class MenuListFragment extends Fragment{
 
 	
 	
-	public static MenuListFragment newInstance(int catId) {
+	public static MenuListFragment newInstance(int catId, QROrderEntity qrOrderEntity) {
 		MenuListFragment fragment = new MenuListFragment();
 		fragment.catId = catId;
+		fragment.qrOrderEntity = qrOrderEntity;
         return fragment;
     }
 	
@@ -107,7 +110,7 @@ public class MenuListFragment extends Fragment{
 //            mContent = savedInstanceState.getString(KEY_CONTENT);
 //        }
 		itemList = new ArrayList<MenuItemEntity>();
-		adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
+		adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item, itemList, qrOrderEntity);
 		getJsonSetEntity();
 		/*for(int i = 0;i<cateItemArray.length();i++)
 		{
@@ -173,7 +176,7 @@ public class MenuListFragment extends Fragment{
 		System.out.println("oncreateactivity");
 		if(adapter==null)
 		{
-			adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList);
+			adapter  = new MenuListItemAdapter(getActivity(), R.layout.menu_list_item,itemList, qrOrderEntity);
 		}
 		fragmentView = inflater.inflate(R.layout.menu_list, container, false);
 		//mListView = (ListView)getActivity().findViewById(R.id.restList);
