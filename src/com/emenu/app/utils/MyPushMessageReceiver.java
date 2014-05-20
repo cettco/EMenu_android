@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
+import com.emenu.app.Data;
 import com.emenu.app.activity.CartActivity;
 
 public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
@@ -40,7 +41,8 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 		// TODO Auto-generated method stub
 		String messageString = "透传消息 message=" + arg1 + " customContentString=" + arg2;
 		System.out.println(messageString);
-		onUpdateMenu(arg0);
+		//onUpdateMenu(arg0);
+		Data.tmpActivity.test();
 		Log.i("cate", "--->"+messageString);
 		if (arg1!=null) {
 			try {

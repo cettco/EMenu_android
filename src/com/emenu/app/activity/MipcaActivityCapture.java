@@ -3,6 +3,7 @@ package com.emenu.app.activity;
 import java.io.IOException;
 import java.util.Vector;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -164,12 +165,14 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	private void processResult(String qrString){
 		RequestParams params = new RequestParams();
 		params.put("qrcode", qrString);
+		Log.i("cate", "start connect qr");
 		HttpConnection.post("http://qianglee.com/orderonline/index.php/UserControl/CheckCode",params, new JsonHttpResponseHandler(){
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject response) {
 				// TODO Auto-generated method stub
-				super.onSuccess(statusCode, response);
+				Log.i("cate", "---->QR:"+response.toString());
+				//super.onSuccess(statusCode, response);
 				try {
 					if(response.getString("code").equals("10021")){		
 						JSONObject result = response.getJSONObject("result");
@@ -198,6 +201,16 @@ public class MipcaActivityCapture extends Activity implements Callback {
 				}
 				jumpToRestDetailActivity();
 				
+			}
+			
+
+			@Override
+			public void onFailure(int statusCode, Throwable e,
+					JSONObject errorResponse) {
+				// TODO Auto-generated method stub
+				//super.onFailure(statusCode, e, errorResponse);
+				Log.i("cate", "qrfiled!!!!!!!!!!!"+errorResponse);
+				jumpToRestDetailActivity();
 			}
 
 		});

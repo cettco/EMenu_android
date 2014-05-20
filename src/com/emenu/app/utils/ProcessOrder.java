@@ -39,7 +39,7 @@ public class ProcessOrder {
 		params.put("restaurantid", restaurantId);
 		params.put("tableid", tableID);
 		params.put("edit", edit);
-		params.put("orderid", orderID);
+		//params.put("orderid", orderID);
 		params.put("number", number);
 		params.put("itemid", itemID);
 		
@@ -66,7 +66,7 @@ public class ProcessOrder {
 					String responseBody, Throwable e) {
 				// TODO Auto-generated method stub
 				super.onFailure(statusCode, headers, responseBody, e);
-				Log.i("cate", "--------------->add failed!");
+				Log.i("cate", "--------------->onfailure,add failed!");
 			}
 			
 			

@@ -6,6 +6,7 @@ import java.util.List;
 import android.R.integer;
 import android.R.string;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.emenu.app.R;
+import com.emenu.app.activity.CartActivity;
 import com.emenu.app.adapter.MenuListItemAdapter.lvButtonListener;
 import com.emenu.app.entities.CartItemEntity;
 import com.emenu.app.entities.MenuItemEntity;
@@ -82,7 +84,6 @@ public class CartListAdapter extends ArrayAdapter<CartItemEntity> {
 			switch (v.getId()) {
 			case R.id.addDish:
 				Log.i("cate","click add btn");
-				Log.i("cate", "ID"+cartItemEntity.getCartTitle());
 				processOrder.add(qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", cartItemEntity.getCartItemID());
 				break;
 
@@ -96,6 +97,6 @@ public class CartListAdapter extends ArrayAdapter<CartItemEntity> {
 		}
 		
 	}
-	
+
 
 }
