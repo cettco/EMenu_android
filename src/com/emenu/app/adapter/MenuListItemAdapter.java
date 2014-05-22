@@ -99,7 +99,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 			Log.i("cate", "id:"+item.getItemID());
 			int vid = v.getId();
 			if(vid == addToCartButton.getId()){
-				processOrder.add(qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", item.getItemID());
+				processOrder.add(context, qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", item.getItemID());
 			}
 		}
 		

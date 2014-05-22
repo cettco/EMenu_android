@@ -7,16 +7,20 @@ public class CartItemEntity implements Serializable{
 	private String cartPrice;
 	private String cartPicUrl;
 	private String cartItemID;
+	private String itemStatus;
 	private int cartAmount;
 		
 
+
 	public CartItemEntity(String cartTitle, String cartPrice,
-			String cartPicUrl, String cartItemID, int cartAmount) {
+			String cartPicUrl, String cartItemID, String itemStatus,
+			int cartAmount) {
 		super();
 		this.cartTitle = cartTitle;
 		this.cartPrice = cartPrice;
 		this.cartPicUrl = cartPicUrl;
 		this.cartItemID = cartItemID;
+		this.itemStatus = itemStatus;
 		this.cartAmount = cartAmount;
 	}
 	public String getCartTitle() {
@@ -48,6 +52,12 @@ public class CartItemEntity implements Serializable{
 	}
 	public void setCartAmount(int cartAmount) {
 		this.cartAmount = cartAmount;
+	}
+	public String getItemStatus() {
+		return itemStatus;
+	}
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
 	}
 	
 }

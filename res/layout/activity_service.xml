@@ -3,16 +3,17 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        android:background="#ffffffff"
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/serviceCallWaiter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="呼叫服务" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/serviceBuy"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="买单" />

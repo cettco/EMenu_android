@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:gravity="center_vertical|center_horizontal">
 
 <LinearLayout
@@ -32,14 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="View Order" />
+            android:text="订单"
+            android:background="@drawable/mybutton_background" />
 
         <Button
             android:id="@+id/callServiceBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Service" />
+            android:text="服务"
+            android:background="@drawable/mybutton_background" />
     </LinearLayout>
 
     
@@ -55,3 +58,6 @@
 </ProgressBar>
 
  </FrameLayout>
+ 
+
+

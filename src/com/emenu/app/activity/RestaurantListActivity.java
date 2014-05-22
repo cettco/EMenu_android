@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import cn.trinea.android.common.view.DropDownListView;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.adapter.RestaurantListAdapter;
@@ -107,7 +108,7 @@ public class RestaurantListActivity extends Activity {
 		RequestParams params = new RequestParams();
 		params.put("restaurantid", String.valueOf(startID));
 		params.put("type", "all");
-		HttpConnection.post("http://qianglee.com/orderonline/index.php/ClientServer/RestaurantList",params,	new JsonHttpResponseHandler(){
+		HttpConnection.post(Data.GET_RESTAURANT_LIST, params, new JsonHttpResponseHandler(){
 
 			@Override
 			public void onSuccess(JSONObject response) {

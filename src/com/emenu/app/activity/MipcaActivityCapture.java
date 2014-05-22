@@ -28,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.entities.RestaurantItemEntity;
@@ -166,7 +167,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		RequestParams params = new RequestParams();
 		params.put("qrcode", qrString);
 		Log.i("cate", "start connect qr");
-		HttpConnection.post("http://qianglee.com/orderonline/index.php/UserControl/CheckCode",params, new JsonHttpResponseHandler(){
+		HttpConnection.post(Data.CHECK_QR_CODE_URL,params, new JsonHttpResponseHandler(){
 
 			@Override
 			public void onSuccess(int statusCode, JSONObject response) {

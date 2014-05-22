@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import cn.trinea.android.common.view.DropDownListView;
 import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListItemAdapter;
 import com.emenu.app.entities.MenuItemEntity;
@@ -133,7 +134,7 @@ public class MenuListFragment extends Fragment{
 		RequestParams params = new RequestParams();
 		params.put("categoryid", String.valueOf(catId));
 
-		HttpConnection.post("http://qianglee.com/orderonline/index.php/ClientServer/MenuItemList",params, new JsonHttpResponseHandler(){
+		HttpConnection.post(Data.GET_MENU_ITEM_LIST, params, new JsonHttpResponseHandler(){
 
 			@Override
 			public void onSuccess(JSONObject response) {
@@ -218,7 +219,7 @@ public class MenuListFragment extends Fragment{
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
-		Toast.makeText(getActivity(), "save state", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), "save state", Toast.LENGTH_SHORT).show();
 		outState.putString(KEY_CONTENT, "abc");
 	}
 //	@Override

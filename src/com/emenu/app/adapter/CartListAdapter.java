@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.activity.CartActivity;
 import com.emenu.app.adapter.MenuListItemAdapter.lvButtonListener;
@@ -33,6 +34,7 @@ public class CartListAdapter extends ArrayAdapter<CartItemEntity> {
 	private Button delButton;
 	private ProcessOrder processOrder;
 	private QROrderEntity qrOrderEntity;
+	private TextView cartStatus;
 	
 	public CartListAdapter(Context context, int resource,
 			List<CartItemEntity> objects, QROrderEntity	qrOrderEntity) {
@@ -60,6 +62,10 @@ public class CartListAdapter extends ArrayAdapter<CartItemEntity> {
 		TextView cartAmountTextView = (TextView)rowView.findViewById(R.id.cartAmount);
 		cartAmountTextView.setText(item.getCartAmount()+"");
 		ImageView cartImageView = (ImageView)rowView.findViewById(R.id.cartImage);
+		Data.IMAGE_CACHE.get(item.getCartPicUrl(), cartImageView);
+		cartStatus = (TextView)rowView.findViewById(R.id.cartStatus);
+		cartStatus.setText(item.getItemStatus());
+		
 		addButton = (Button)rowView.findViewById(R.id.addDish);
 		delButton = (Button)rowView.findViewById(R.id.deleteDish);
 		addButton.setOnClickListener(new lvButtonListener(position));
@@ -84,13 +90,13 @@ public class CartListAdapter extends ArrayAdapter<CartItemEntity> {
 			switch (v.getId()) {
 			case R.id.addDish:
 				Log.i("cate","click add btn");
-				processOrder.add(qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", cartItemEntity.getCartItemID());
+				processOrder.add(context, qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", cartItemEntity.getCartItemID());
 				break;
 
 			case R.id.deleteDish:
 				Log.i("cate","click del btn");
 				Log.i("cate", "id"+cartItemEntity.getCartTitle());
-				processOrder.del(qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", cartItemEntity.getCartItemID());
+				processOrder.del(context, qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", cartItemEntity.getCartItemID());
 				break;
 			}
 			

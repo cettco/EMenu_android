@@ -41,6 +41,9 @@ public class RestaurantDetailActivity extends Activity {
 		Intent intent = getIntent();
 		restaurantItemEntity = (RestaurantItemEntity)intent.getSerializableExtra("RestaurantItemEntity");
 		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
+		if (qrOrderEntity!=null) {
+			Data.qrOrderEntity = qrOrderEntity;
+		}
 	}
 
 	private void onSetView(){

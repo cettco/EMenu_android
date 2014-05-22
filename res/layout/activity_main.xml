@@ -3,7 +3,14 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fcf3f3"
     android:orientation="vertical" >
+    
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/emenu_title" 
+        android:adjustViewBounds="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +19,7 @@
         <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
             android:id="@+id/scrollViewPager"
             android:layout_width="@dimen/view_pager_witdh"
-            android:layout_height="@dimen/view_pager_height" />
+            android:layout_height="@dimen/view_pager_height"/>
 
         <com.viewpagerindicator.CirclePageIndicator
             android:id="@+id/circlePage"
@@ -33,25 +40,21 @@
             android:id="@+id/preOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order" />
+            android:background="@drawable/ordering" />
 
         <Button
             android:id="@+id/scanCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QR Code" />
+            android:background="@drawable/qrcode"
+            android:layout_marginLeft="30dp" />
 
         <Button
             android:id="@+id/restaurantList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant List" />
-
-        <TextView
-            android:id="@+id/scanResultText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Result" />
+            android:background="@drawable/restaurantlist"
+            android:layout_marginLeft="30dp" />
     </LinearLayout>
 
 </LinearLayout>

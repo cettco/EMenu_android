@@ -7,6 +7,7 @@ import java.util.List;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 import com.emenu.app.R;
+import com.emenu.app.activity.CartActivity;
 import com.emenu.app.activity.MenuListActivity;
 import com.emenu.app.activity.MipcaActivityCapture;
 import com.emenu.app.activity.RestaurantListActivity;
@@ -32,7 +33,6 @@ public class MainActivity extends Activity {
 	private Button preOrderBtn;
 	private Button scanBtn;
 	private Button resListBtn;
-	private TextView scanResultText;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		imageIdList.add(R.drawable.pic2);
 		imageIdList.add(R.drawable.pic3);
 		imageIdList.add(R.drawable.pic4);
-		imageIdList.add(R.drawable.pic5);
+		//imageIdList.add(R.drawable.pic5);
 		
 		viewPager.setAdapter(new ImagePagerAdapter(getApplicationContext(),
 				imageIdList));
@@ -83,8 +83,7 @@ public class MainActivity extends Activity {
 		resListBtn.setOnClickListener(resListBtnClickListener);
 		
 		
-		//²âÊÔ´úÂë
-		scanResultText = (TextView)findViewById(R.id.scanResultText);
+		//ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½
 		
 	}
 	private OnClickListener scanBtnClickListener = new OnClickListener() {
@@ -104,7 +103,10 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+			Intent intent = new Intent();
+			intent.putExtra("QROrderEntity", Data.qrOrderEntity);
+			intent.setClass(MainActivity.this, CartActivity.class);
+			startActivity(intent);
 		}
 	};
 	private OnClickListener resListBtnClickListener = new OnClickListener() {
@@ -127,14 +129,26 @@ public class MainActivity extends Activity {
 		case SCANNIN_GREQUEST_CODE:
 			if(resultCode == RESULT_OK){
 				Bundle bundle = data.getExtras();
-				//ÏÔÊ¾É¨Ãèµ½µÄÄÚÈÝ
-				scanResultText.setText(bundle.getString("result"));
-				//ÏÔÊ¾
+				//ï¿½ï¿½Ê¾É¨ï¿½èµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//scanResultText.setText(bundle.getString("result"));
+				//ï¿½ï¿½Ê¾
 				//mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
 			}
 			break;
 		}
     }
-	
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(Data.qrOrderEntity!=null){
+			preOrderBtn.setClickable(true);
+		}else {
+			preOrderBtn.setClickable(false);
+		}
+	}
+	
+	
+	
 }

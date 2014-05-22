@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.adapter.MenuListAdapter;
 import com.emenu.app.entities.QROrderEntity;
@@ -70,12 +71,13 @@ public class MenuListActivity extends FragmentActivity {
 		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
 		if(qrOrderEntity==null){
 			viewCartBtn.setClickable(false);
+			callServiceBtn.setClickable(false);
 		}
 		RequestParams params = new RequestParams();
 		params.put("menuid", menuID);
 		Log.i("cate","menuid="+menuID);
 		
-		HttpConnection.post("http://qianglee.com/orderonline/index.php/ClientServer/MenuList", params, 
+		HttpConnection.post(Data.GET_MENU_LIST , params, 
 				new JsonHttpResponseHandler() {
 
 					@Override
@@ -103,16 +105,6 @@ public class MenuListActivity extends FragmentActivity {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-
-						// adapter = new
-						// MenuListAdapter(getSupportFragmentManager(),
-						// pagerArrayList, titleList);
-						// pager = (ViewPager)findViewById(R.id.menuListPager);
-						// pager.setAdapter(adapter);
-
-						// indicator =
-						// (TabPageIndicator)findViewById(R.id.menuListIndicator);
-						// indicator.setViewPager(pager);
 
 					}
 
@@ -144,6 +136,7 @@ public class MenuListActivity extends FragmentActivity {
 
 			case R.id.callServiceBtn:
 				intent.setClass(MenuListActivity.this, CallServiceActivity.class);
+				intent.putExtra("QROrderEntity", qrOrderEntity);
 				startActivity(intent);
 				break;
 			}

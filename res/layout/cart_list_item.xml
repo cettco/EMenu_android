@@ -17,8 +17,8 @@
         
 		<ImageView
 		    android:id="@+id/cartImage"
-		    android:layout_width="50dip"
-		    android:layout_height="50dip"
+		    android:layout_width="70dip"
+		    android:layout_height="70dip"
 		    android:src="@drawable/dish" />
         
 	</LinearLayout>
@@ -55,8 +55,8 @@
      <!-- Rightend Arrow -->
        <Button
          android:id="@+id/deleteDish"
-         android:layout_width="30sp"
-         android:layout_height="30sp"
+         android:layout_width="40sp"
+         android:layout_height="40sp"
          android:layout_below="@+id/cartPrice"
          android:layout_alignParentRight="true"
          android:layout_marginTop="5sp"
@@ -65,8 +65,8 @@
           
      <Button
          android:id="@+id/addDish"
-         android:layout_width="30sp"
-         android:layout_height="30sp"
+         android:layout_width="40sp"
+         android:layout_height="40sp"
          android:layout_below="@+id/cartPrice"
          android:layout_toLeftOf="@+id/deleteDish"
          android:layout_marginTop="5sp"
@@ -74,14 +74,26 @@
          android:textSize="12sp" />
      <TextView
          android:id="@+id/cartAmount"
-         android:layout_width="30sp"
-         android:layout_height="25sp"
+         android:layout_width="40sp"
+         android:layout_height="35sp"
          android:layout_below="@+id/cartPrice"
          android:layout_toLeftOf="@+id/addDish"
          android:layout_marginTop="5sp"
          android:layout_marginRight="5sp"
          android:text="0"
          android:background="#FFFFFF"
+         android:textColor="#000000"
+         android:gravity="center"
+         android:textSize="12sp" />
+      <TextView
+         android:id="@+id/cartStatus"
+         android:layout_width="50sp"
+         android:layout_height="35sp"
+         android:layout_below="@+id/cartPrice"
+         android:layout_toLeftOf="@+id/cartAmount"
+         android:layout_marginTop="5sp"
+         android:layout_marginRight="5sp"
+         android:text="status"
          android:textColor="#000000"
          android:gravity="center"
          android:textSize="12sp" />
