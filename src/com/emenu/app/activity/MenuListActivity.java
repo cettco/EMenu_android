@@ -26,6 +26,7 @@ import android.support.v4.view.ViewPager.PageTransformer;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -43,7 +44,7 @@ public class MenuListActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_menulist);
 		pagerArrayList = new ArrayList<MenuListFragment>();
 		titleList = new ArrayList<String>();
@@ -76,7 +77,6 @@ public class MenuListActivity extends FragmentActivity {
 		RequestParams params = new RequestParams();
 		params.put("menuid", menuID);
 		Log.i("cate","menuid="+menuID);
-		
 		HttpConnection.post(Data.GET_MENU_LIST , params, 
 				new JsonHttpResponseHandler() {
 

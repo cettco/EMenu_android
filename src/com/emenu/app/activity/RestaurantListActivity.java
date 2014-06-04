@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RestaurantListActivity extends Activity {
@@ -46,6 +47,8 @@ public class RestaurantListActivity extends Activity {
 	private int startRestID = 0;
 	private int len = 0;
 	private QROrderEntity qrOrderEntity = null;
+	private TextView restListFailedTextView;
+	private Button restListFailedButton;
 /*	String urlString = null;
 	String nameString = null;
 	String addString = null;*/
@@ -58,10 +61,31 @@ public class RestaurantListActivity extends Activity {
 		initPopupMenu();
 		initListView();
 	}
+	
+	private OnClickListener listener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case R.id.restListFailedBtn:
+				restListFailedButton.setVisibility(Button.INVISIBLE);
+				restListFailedTextView.setVisibility(TextView.INVISIBLE);
+				restaurantProgressBar.setVisibility(View.VISIBLE);
+				startRestID = 0;
+				setOnListView(startRestID);
+				break;
+			}
+		}
+	};
+	
 	private void initListView()
 	{
 		restaurantProgressBar = (ProgressBar)findViewById(R.id.restListProgressbar);
 		resListView = (DropDownListView)findViewById(R.id.resListView);
+		restListFailedButton = (Button)findViewById(R.id.restListFailedBtn);
+		restListFailedTextView = (TextView)findViewById(R.id.restListFailed);
+		restListFailedButton.setOnClickListener(listener);
 		restaurantItemList = new ArrayList<RestaurantItemEntity>();
 /*		for(int i=0;i<10;i++)
 		{
@@ -99,6 +123,7 @@ public class RestaurantListActivity extends Activity {
                 resListView.onBottomComplete();
 			}
 		});
+		resListView.setOnBottomStyle(false);
 		setOnListView(startRestID);
 	}
 	
@@ -115,6 +140,7 @@ public class RestaurantListActivity extends Activity {
 				// TODO Auto-generated method stub
 				super.onSuccess(response);
 				restaurantProgressBar.setVisibility(View.INVISIBLE);
+				resListView.setOnBottomStyle(true);
 				try {
 					if(response.getString("message").equals("Select Ok")){
 						JSONObject result = response.getJSONObject("result");
@@ -143,7 +169,19 @@ public class RestaurantListActivity extends Activity {
 				}
 				
 			}
-	
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseBody, Throwable e) {
+				// TODO Auto-generated method stub
+				//super.onFailure(statusCode, headers, responseBody, e);
+				resListView.setOnBottomStyle(false);
+				restaurantProgressBar.setVisibility(View.INVISIBLE);
+				restListFailedTextView.setVisibility(TextView.VISIBLE);
+				restListFailedButton.setVisibility(Button.VISIBLE);
+			}
+			
+			
 		});
 		
 		if(len>0) return true;

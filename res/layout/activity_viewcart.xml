@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
         android:background="#ffffffff"
     android:gravity="center_vertical|center_horizontal">
-    
+    <include layout="@layout/commontitle_ui" />
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/mmtitle_bg_alpha" >
 
-    <Button
+<!--     <Button
         android:id="@+id/button_back"
         android:layout_width="75.0dip"
         android:text="返回"
@@ -24,6 +24,6 @@
         android:gravity="center_vertical"
         android:text="二维码扫描"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
-
+        android:textSize="18sp" /> -->
+<include layout="@layout/commontitle_ui" />
 </RelativeLayout>

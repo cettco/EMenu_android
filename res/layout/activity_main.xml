@@ -6,12 +6,12 @@
     android:background="#fcf3f3"
     android:orientation="vertical" >
     
-    <ImageView
+<!--     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/emenu_title" 
-        android:adjustViewBounds="true"/>
-
+        android:adjustViewBounds="true"/> -->
+	<include layout="@layout/commontitle_ui" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >

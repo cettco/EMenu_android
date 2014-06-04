@@ -6,6 +6,10 @@
         android:background="#ffffffff"
     android:orientation="vertical" >
 
+<include
+    android:layout_width="fill_parent"
+    layout="@layout/commontitle_ui" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,5 +62,25 @@
         style="?android:attr/progressBarStyleLarge"
         >
 </ProgressBar>
+	
+<TextView
+    android:id="@+id/restListFailed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="餐厅列表加载失败"
+    android:layout_marginTop="30sp"
+    android:textColor="@color/deep_gray"
+    android:visibility="invisible" />
+<Button
+        android:id="@+id/restListFailedBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="10sp"
+    android:text="重新加载"
+    android:textColor="@color/deep_gray"
+    android:visibility="invisible" />
+    />
 
 </LinearLayout>

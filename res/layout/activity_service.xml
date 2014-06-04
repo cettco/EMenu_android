@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
         android:background="#ffffffff"
     android:orientation="vertical" >
-
+<include layout="@layout/commontitle_ui" />
     <Button
         android:id="@+id/serviceCallWaiter"
         android:layout_width="fill_parent"
