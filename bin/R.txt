@@ -528,7 +528,6 @@ int id checkbox 0x7f0a0041
 int id circlePage 0x7f0a0055
 int id collapseActionView 0x7f0a0012
 int id container 0x7f0a0053
-int id cu_ib_menuleft 0x7f0a0084
 int id cu_ib_menuright 0x7f0a0086
 int id cu_tv_title 0x7f0a0085
 int id decode 0x7f0a001f
@@ -636,6 +635,7 @@ int id submit_area 0x7f0a004d
 int id tabMode 0x7f0a0007
 int id thumbnail 0x7f0a007c
 int id title 0x7f0a003f
+int id titleBarBack 0x7f0a0084
 int id top 0x7f0a0004
 int id top_action_bar 0x7f0a0034
 int id triangle 0x7f0a0001

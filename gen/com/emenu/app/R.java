@@ -1569,7 +1569,6 @@ containing a value of this type.
         public static final int circlePage=0x7f0a0055;
         public static final int collapseActionView=0x7f0a0012;
         public static final int container=0x7f0a0053;
-        public static final int cu_ib_menuleft=0x7f0a0084;
         public static final int cu_ib_menuright=0x7f0a0086;
         public static final int cu_tv_title=0x7f0a0085;
         public static final int decode=0x7f0a001f;
@@ -1677,6 +1676,7 @@ containing a value of this type.
         public static final int tabMode=0x7f0a0007;
         public static final int thumbnail=0x7f0a007c;
         public static final int title=0x7f0a003f;
+        public static final int titleBarBack=0x7f0a0084;
         public static final int top=0x7f0a0004;
         public static final int top_action_bar=0x7f0a0034;
         public static final int triangle=0x7f0a0001;

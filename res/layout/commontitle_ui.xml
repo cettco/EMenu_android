@@ -5,7 +5,7 @@
     android:background="#f1898a" >
 
     <ImageButton
-        android:id="@+id/cu_ib_menuleft"
+        android:id="@+id/titleBarBack"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:scaleType="fitCenter"
@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:layout_toRightOf="@id/cu_ib_menuleft"
+        android:layout_toRightOf="@id/titleBarBack"
         android:layout_toLeftOf="@+id/cu_ib_menuright"
         android:textColor="#FFFFFF"
         android:textSize="30sp"

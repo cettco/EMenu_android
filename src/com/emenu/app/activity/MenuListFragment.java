@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -167,6 +168,16 @@ public class MenuListFragment extends Fragment{
 				}
 				
 			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseBody, Throwable e) {
+				// TODO Auto-generated method stub
+				//super.onFailure(statusCode, headers, responseBody, e);
+				
+			}
+			
+			
 			
 		});
 	}

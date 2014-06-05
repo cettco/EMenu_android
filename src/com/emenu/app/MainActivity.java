@@ -22,6 +22,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class MainActivity extends Activity {
 	private Button preOrderBtn;
 	private Button scanBtn;
 	private Button resListBtn;
+	private ImageButton returnButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +43,9 @@ public class MainActivity extends Activity {
 		
 		viewPager = (AutoScrollViewPager) findViewById(R.id.scrollViewPager);
 		indicator = (CirclePageIndicator) findViewById(R.id.circlePage);
-
+		returnButton = (ImageButton)findViewById(R.id.titleBarBack);
+		returnButton.setVisibility(View.INVISIBLE);
+		
 		List<Integer> imageIdList = new ArrayList<Integer>();
 		imageIdList.add(R.drawable.pic1);
 		imageIdList.add(R.drawable.pic2);
