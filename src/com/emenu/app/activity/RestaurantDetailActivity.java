@@ -1,5 +1,8 @@
 package com.emenu.app.activity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.emenu.app.Data;
 import com.emenu.app.R;
 import com.emenu.app.entities.QROrderEntity;
@@ -7,6 +10,7 @@ import com.emenu.app.entities.RestaurantItemEntity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RestaurantDetailActivity extends Activity {
 
@@ -57,6 +62,37 @@ public class RestaurantDetailActivity extends Activity {
 		restTel = (TextView)findViewById(R.id.restTel);
 		restDetail = (TextView)findViewById(R.id.restDetail);
 		restDetailTableNo = (TextView)findViewById(R.id.restDetailTableNo);
+		
+		restDetailAddr.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(RestaurantDetailActivity.this, MapActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+		
+		restTel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				String num=restTel.getText().toString();
+				Pattern p = Pattern.compile("\\d+?");
+				Matcher match = p.matcher(num);
+				//正则验证输入的是否为数字
+				if(match.matches()){
+					Intent intent=new Intent("android.intent.action.CALL",Uri.parse("tel:"+num));
+					startActivity(intent);
+				}else{
+					Toast.makeText(RestaurantDetailActivity.this, "号码不对",Toast.LENGTH_LONG).show();
+				}
+				
+			}
+		});
 		
 		restDetailOrder.setOnClickListener(new OnClickListener() {
 			
