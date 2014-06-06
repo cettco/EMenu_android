@@ -1,5 +1,6 @@
 package com.emenu.app.activity;
 
+import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,9 +69,20 @@ public class RestaurantDetailActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setClass(RestaurantDetailActivity.this, MapActivity.class);
-				startActivity(intent);
+				Intent intent2;
+				String address = restDetailAddr.getText().toString();
+				String uri = "intent://map/geocoder?address="+address+"&src=com.emenu.app#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end";
+				try {
+					intent2 = Intent.getIntent(uri);
+					startActivity(intent2);
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+				
+//				Intent intent = new Intent();
+//				intent.setClass(RestaurantDetailActivity.this, MapActivity.class);
+//				startActivity(intent);
 				
 			}
 		});

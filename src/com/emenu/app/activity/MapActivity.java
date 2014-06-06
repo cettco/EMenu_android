@@ -30,17 +30,18 @@ public class MapActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		SDKInitializer.initialize(getApplicationContext()); 
-//		Intent intent = getIntent();
-//		if (intent.hasExtra("x") && intent.hasExtra("y")) {
-//			// 当用intent参数时，设置中心点为指定点
-//			Bundle b = intent.getExtras();
-//			LatLng p = new LatLng(31,121);
-//			mMapView = new MapView(this,
-//					new BaiduMapOptions().mapStatus(new MapStatus.Builder()
-//							.target(p).build()));
-//		} else {
-//			mMapView = new MapView(this, new BaiduMapOptions());
-//		}
+		//setContentView(R.layout.activity_map);
+		Intent intent = getIntent();
+		if (intent.hasExtra("x") && intent.hasExtra("y")) {
+			// 当用intent参数时，设置中心点为指定点
+			Bundle b = intent.getExtras();
+			LatLng p = new LatLng(31,121);
+			mMapView = new MapView(this,
+					new BaiduMapOptions().mapStatus(new MapStatus.Builder()
+							.target(p).build()));
+		} else {
+			mMapView = new MapView(this, new BaiduMapOptions());
+		}
 		LatLng point = new LatLng(31,121);
 		mMapView = new MapView(this,
 				new BaiduMapOptions().mapStatus(new MapStatus.Builder()
@@ -55,6 +56,7 @@ public class MapActivity extends Activity {
 			    .icon(bitmap);  
 			//在地图上添加Marker，并显示  
 		mBaiduMap.addOverlay(option);
+//		
 //		Button button = new Button(this);
 //		button.setText("click");
 //		button.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,8 @@ public class MapActivity extends Activity {
 //				
 //			}
 //		});
+//		
+//		mMapView.addView(button);
 		
 	}
 
