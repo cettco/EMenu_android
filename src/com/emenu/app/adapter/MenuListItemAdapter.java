@@ -9,6 +9,7 @@ import cn.trinea.android.common.util.CacheManager;
 
 import com.emenu.app.Data;
 import com.emenu.app.R;
+import com.emenu.app.activity.RestaurantListActivity;
 import com.emenu.app.entities.MenuItemEntity;
 import com.emenu.app.entities.QROrderEntity;
 import com.emenu.app.utils.HttpConnection;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 	private List<MenuItemEntity> list;
@@ -100,6 +102,7 @@ public class MenuListItemAdapter extends ArrayAdapter<MenuItemEntity> {
 			int vid = v.getId();
 			if(vid == addToCartButton.getId()){
 				processOrder.add(context, qrOrderEntity.getRestaurantID(), qrOrderEntity.getTableID(), qrOrderEntity.getOrderID(), "1", item.getItemID());
+				Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show();
 			}
 		}
 		

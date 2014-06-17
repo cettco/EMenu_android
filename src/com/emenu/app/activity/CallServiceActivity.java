@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class CallServiceActivity extends Activity {
@@ -28,6 +29,7 @@ public class CallServiceActivity extends Activity {
 	private Button button1;
 	private Button button2;
 	private QROrderEntity qrOrderEntity;
+	private ImageButton backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class CallServiceActivity extends Activity {
 		getIntentData();
 		callWaiterButton = (Button)findViewById(R.id.serviceCallWaiter);
 		callWaiterButton.setOnClickListener(listener);
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(listener);
+
 	}
 	
 	private OnClickListener listener = new OnClickListener() {
@@ -49,6 +54,8 @@ public class CallServiceActivity extends Activity {
 				if(qrOrderEntity!=null)
 					hurryOrderConnection();
 				break;
+			case R.id.titleBarBack:
+				CallServiceActivity.this.finish();
 			default:
 				break;
 			}

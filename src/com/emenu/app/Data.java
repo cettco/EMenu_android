@@ -14,7 +14,7 @@ public class Data extends Application {
 	public static final int RESULT_FROM_REST_TO_MAIN_CODE = 5;
 	public static final ImageCache IMAGE_CACHE = CacheManager.getImageCache();
 //	private static final String baseUrl = "http://180.160.35.36";
-	private static final String baseUrl = "http://m.tzwm.me:9999";
+	private static final String baseUrl = "http://m.tzwm.me";
 	public static final String ORDER_CONFIRM_URL = baseUrl+"/orderonline/index.php/UserControl/FinishOrder";
 	public static final String CHECK_QR_CODE_URL = baseUrl+"/orderonline/index.php/UserControl/CheckCode";
 	public static final String GET_ORDER_ACTIVITY_URL = baseUrl+"/orderonline/index.php/UserControl/MyActivity";

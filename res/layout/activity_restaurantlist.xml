@@ -30,6 +30,7 @@
             android:text="全部口味" />
 
         <Button
+            android:id="@+id/sortRestBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dip"

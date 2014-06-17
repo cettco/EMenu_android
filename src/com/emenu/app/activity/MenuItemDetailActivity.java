@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class MenuItemDetailActivity extends Activity {
 	private TextView menuItemUnit = null;
 	private TextView menuItemDescription = null;
 	private LinearLayout backToMenu = null;
+	private ImageButton backButton = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class MenuItemDetailActivity extends Activity {
 		menuItemUnit = (TextView)findViewById(R.id.menuItemUnit);
 		menuItemDescription = (TextView)findViewById(R.id.menuItemDescription);
 		backToMenu = (LinearLayout)findViewById(R.id.backToMenu);
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(listener);
 		
 		Data.IMAGE_CACHE.get(menuItem.getItemPicUrl(),menuItemPic);
 		menuItemDetailName.setText(menuItem.getItemTitle());

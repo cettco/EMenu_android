@@ -1,8 +1,8 @@
 package com.emenu.app.activity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
@@ -48,7 +49,8 @@ public class RestaurantListActivity extends Activity {
 	private int len = 0;
 	private QROrderEntity qrOrderEntity = null;
 	private TextView restListFailedTextView;
-	private Button restListFailedButton;
+	private Button restListFailedButton,sortRestBtn;
+	private ImageButton backButton;
 /*	String urlString = null;
 	String nameString = null;
 	String addString = null;*/
@@ -87,6 +89,15 @@ public class RestaurantListActivity extends Activity {
 		restListFailedTextView = (TextView)findViewById(R.id.restListFailed);
 		restListFailedButton.setOnClickListener(listener);
 		restaurantItemList = new ArrayList<RestaurantItemEntity>();
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				RestaurantListActivity.this.finish();
+			}
+		});
 /*		for(int i=0;i<10;i++)
 		{
 			RestaurantItemEntity item = new RestaurantItemEntity("test","test", "test");
@@ -219,7 +230,25 @@ public class RestaurantListActivity extends Activity {
                 return true;
             }
         });
+		
+		sortRestBtn = (Button)findViewById(R.id.sortRestBtn);
+		sortRestBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Collections.sort(restaurantItemList, new Comparator<RestaurantItemEntity>() {
+
+					@Override
+					public int compare(RestaurantItemEntity lhs,
+							RestaurantItemEntity rhs) {
+						// TODO Auto-generated method stub
+						return (lhs.getName().compareTo(rhs.getName()));
+					}
+				});
+				restaurantListAdapter.notifyDataSetChanged();
+			}
+		});
 	}
-
-
+	
 }

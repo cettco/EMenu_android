@@ -40,20 +40,20 @@
             android:id="@+id/preOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ordering" />
+            android:background="@drawable/orderbtn_background" />
 
         <Button
             android:id="@+id/scanCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/qrcode"
+            android:background="@drawable/codebtn_background"
             android:layout_marginLeft="30dp" />
 
         <Button
             android:id="@+id/restaurantList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/restaurantlist"
+            android:background="@drawable/rest_listbtn_background"
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 

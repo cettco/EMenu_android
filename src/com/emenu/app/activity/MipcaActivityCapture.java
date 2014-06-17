@@ -26,6 +26,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.emenu.app.Data;
@@ -61,6 +62,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	private RestaurantItemEntity restaurantItemEntity = null;
 	private QROrderEntity qrOrderEntity = null;
 	private String qrCodeString;
+	private ImageButton backButton;
+	private String macAddress;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -70,6 +73,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(listener);
 		
 /*		Button mButtonBack = (Button) findViewById(R.id.button_back);
 		mButtonBack.setOnClickListener(new OnClickListener() {
@@ -83,6 +88,15 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 	}
+	
+	private OnClickListener listener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			finish();
+		}
+	};
 
 	@Override
 	protected void onResume() {
@@ -156,6 +170,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			//RestaurantItemEntity restaurantItemEntity = new RestaurantItemEntity("null", "Name", "aaa", "te", "1", "1", "description", "12312"); 
 			toIntent.putExtra("RestaurantItemEntity", restaurantItemEntity);
 			toIntent.putExtra("QROrderEntity", qrOrderEntity);
+			toIntent.putExtra("macaddress", macAddress);
 			toIntent.setClass(MipcaActivityCapture.this, RestaurantDetailActivity.class);
 			startActivity(toIntent);
 			
@@ -189,6 +204,8 @@ public class MipcaActivityCapture extends Activity implements Callback {
 						String tableNoString = resultFromQRCode.getString("tableno");
 						String tableStatuString = resultFromQRCode.getString("tablestatus");
 						String orderIDString = resultFromQRCode.getString("orderid");
+						String macaddress = resultFromQRCode.getString("macaddress");
+						macAddress = macaddress;
 						restaurantItemEntity = new RestaurantItemEntity(urlString, nameString, addString, typeString, restIDString, menuIDString, descriptionString, phoneString);
 						qrOrderEntity = new QROrderEntity(nameString, restIDString, tableNoString, tableStatuString, orderIDString, qrCodeString);
 						isCodeCorrect = true;

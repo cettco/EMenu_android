@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class RestaurantDetailActivity extends Activity {
 	private RestaurantItemEntity restaurantItemEntity = null;
 	private QROrderEntity qrOrderEntity = null;
 	private TextView restDetailTableNo = null;
+	private ImageButton backButton;
+	private String macAddress = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +50,20 @@ public class RestaurantDetailActivity extends Activity {
 		Intent intent = getIntent();
 		restaurantItemEntity = (RestaurantItemEntity)intent.getSerializableExtra("RestaurantItemEntity");
 		qrOrderEntity = (QROrderEntity)intent.getSerializableExtra("QROrderEntity");
+		macAddress = (String)intent.getSerializableExtra("macaddress");
 		if (qrOrderEntity!=null) {
 			Data.qrOrderEntity = qrOrderEntity;
 		}
 	}
+	
+	private OnClickListener listener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			finish();
+		}
+	};
 
 	private void onSetView(){
 		
@@ -63,6 +76,8 @@ public class RestaurantDetailActivity extends Activity {
 		restTel = (TextView)findViewById(R.id.restTel);
 		restDetail = (TextView)findViewById(R.id.restDetail);
 		restDetailTableNo = (TextView)findViewById(R.id.restDetailTableNo);
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(listener);
 		
 		restDetailAddr.setOnClickListener(new OnClickListener() {
 			

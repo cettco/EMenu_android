@@ -85,8 +85,6 @@ public class ProcessOrder {
 					Log.i("cate", "--------------->add failed!");
 				}
 			}
-			
-			
 
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
@@ -95,15 +93,6 @@ public class ProcessOrder {
 				super.onFailure(statusCode, headers, responseBody, e);
 				Log.i("cate", "--------------->onfailure,add failed!");
 			}
-
-/*			@Override
-			public void onSuccess(int statusCode, Header[] headers,
-					String responseBody) {
-				// TODO Auto-generated method stub
-				//super.onSuccess(statusCode, headers, responseBody);
-				Log.i("cate", "--------------->add/del dish:"+responseBody);
-			}*/
-			
 			
 		});
 		return true;

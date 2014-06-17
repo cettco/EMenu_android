@@ -47,7 +47,7 @@ public class RestaurantListAdapter extends ArrayAdapter<RestaurantItemEntity> {
 		String url = item.getUrl();
 		Data.IMAGE_CACHE.get(item.getUrl(), imageView);
 		//itemTitleView.setText(item.getItemTitle());
-		itemTextView.setText(item.getAddress());
+		itemTextView.setText("地址："+item.getAddress());
 
 		return rowView;
 	}

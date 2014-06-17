@@ -1,7 +1,7 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1389994288000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf E:\Workspace\eclipse\appcompat_v7\libs\android-support-v4.jar
-1401978852266 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf E:\Workspace\eclipse\project\emenu\EMenu_android\libs\android-support-v4.jar
-1399291685603 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf E:\Workspace\eclipse\libs\android-auto-scroll-view-pager\libs\android-support-v4.jar
-1399286934320 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf E:\Workspace\eclipse\libs\Android-ViewPagerIndicator-master\library\libs\android-support-v4.jar
+1398858398000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf /Users/lee/Documents/workspace2/android-auto-scroll-view-pager/libs/android-support-v4.jar
+1398858398000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf /Users/lee/Documents/workspace2/library/libs/android-support-v4.jar
+1399790715000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf /Users/lee/Downloads/EMenu_android/libs/android-support-v4.jar
+1389936690000 627582 cb6883d96005bc85b3e868f204507ea5b4fa9bbf /Users/lee/Documents/workspace2/appcompat_v7/libs/android-support-v4.jar

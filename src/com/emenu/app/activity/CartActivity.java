@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class CartActivity extends Activity {
 	private ProgressBar cartViewProgressBar;
 	private Button viewCartRefresh;
 	private Button viewCartConfirm;
+	private ImageButton backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class CartActivity extends Activity {
 		menuItemList = new ArrayList<CartItemEntity>();	
 		viewCartRefresh = (Button)findViewById(R.id.viewCartRefresh);
 		viewCartConfirm = (Button)findViewById(R.id.viewCartConfirm);
+		backButton = (ImageButton)findViewById(R.id.titleBarBack);
+		backButton.setOnClickListener(listener);
 /*		for(int i = 0;i<10;i++)
 		{
 			CartItemEntity item = new CartItemEntity("DishTitle", "$5.1125", "http://www.qianglee.com/a.jpg","1", 5);
@@ -111,6 +115,8 @@ public class CartActivity extends Activity {
 			case R.id.viewCartConfirm:
 				confirmOrder();
 				break;
+			case R.id.titleBarBack:
+				CartActivity.this.finish();
 			}
 
 		}
